@@ -14,13 +14,13 @@ services:
       - key: DB_NAME
         value: "postgres"
       - key: DB_USER
-        value: "postgres"
+        value: "postgres.uecrpglevxxhcjvwiwlc"
       - key: DB_PASSWORD
         value: "ShivamChoudhary4094"
       - key: DB_HOST
-        value: "db.uecrpglevxxhcjvwiwlc.supabase.co"
+        value: "aws-1-ap-south-1.pooler.supabase.com"
       - key: DB_PORT
-        value: "5432"
+        value: "6543"
       - key: EMAILJS_SERVICE_ID
         sync: false
       - key: EMAILJS_TEMPLATE_ID
