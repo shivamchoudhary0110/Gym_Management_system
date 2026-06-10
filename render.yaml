@@ -10,7 +10,7 @@ services:
       - key: DJANGO_DEBUG
         value: "False"
       - key: DJANGO_ALLOWED_HOSTS
-        sync: false
+        value: "gym-management-system-wfta.onrender.com"
       - key: DB_NAME
         sync: false
       - key: DB_USER
