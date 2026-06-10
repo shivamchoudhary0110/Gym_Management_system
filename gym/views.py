@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from datetime import date, datetime
 
@@ -467,3 +467,7 @@ def delete_contact(request, pid):
         contact = get_object_or_404(Contact, id=pid)
         contact.delete()
     return redirect('gym:read_queries')
+
+
+def health_check(request):
+    return JsonResponse({"status": "ok"})
