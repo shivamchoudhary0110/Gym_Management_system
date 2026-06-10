@@ -57,11 +57,11 @@ WSGI_APPLICATION = 'GymManagementDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'postgres'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
+        'ENGINE': 'django.db.backends.postgresql' if os.environ.get('DB_HOST') else 'django.db.backends.sqlite3',
+        'NAME': os.environ.get('DB_NAME', BASE_DIR / 'db.sqlite3') if os.environ.get('DB_HOST') else BASE_DIR / 'db.sqlite3',
+        'USER': os.environ.get('DB_USER', ''),
         'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
+        'HOST': os.environ.get('DB_HOST', ''),
         'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
