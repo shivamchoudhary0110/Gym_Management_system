@@ -2,7 +2,7 @@ services:
   - type: web
     name: gym-management-system
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
     startCommand: gunicorn GymManagementDjango.wsgi:application
     envVars:
       - key: DJANGO_SECRET_KEY
