@@ -1,0 +1,48 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <h1 class="dashboard-title">All <span>Users</span></h1>
+
+    <div class="table-container">
+        <div class="table-header">
+            <h3>Registered <span>Users</span></h3>
+        </div>
+        <table class="gym-table" id="example">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Staff</th>
+                    <th>Joined</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>{{ u.first_name }} {{ u.last_name }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{% if u.is_staff %}<span style="color:var(--success);">Yes</span>{% else %}<span style="color:var(--text-muted);">No</span>{% endif %}</td>
+                    <td>{{ u.date_joined|date:"d M Y" }}</td>
+                    <td>
+                        <a href="{% url 'gym:edit_User' u.id %}" class="btn-sm btn-edit"><i class="fas fa-edit"></i> Edit</a>
+                        {% if u != request.user %}
+                        <form method="post" action="{% url 'gym:delete_User' u.id %}" style="display:inline;" onsubmit="return confirm('Delete user {{ u.username }}?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-sm btn-delete"><i class="fas fa-trash"></i></button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

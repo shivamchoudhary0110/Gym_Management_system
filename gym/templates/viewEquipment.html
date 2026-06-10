@@ -1,0 +1,44 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="table-container">
+        <div class="table-header">
+            <h3>View <span>Equipment</span></h3>
+        </div>
+        <table id="example" class="gym-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Equipment Name</th>
+                    <th>Price</th>
+                    <th>Unit</th>
+                    <th>Purchase Date</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in equipment %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.price }}</td>
+                    <td>{{ i.unit }}</td>
+                    <td>{{ i.purchasedate }}</td>
+                    <td>{{ i.description }}</td>
+                    <td>
+                        <a href="{% url 'gym:edit_Equipment' i.id %}" class="btn-sm btn-edit">Edit</a>
+                        <form method="post" action="{% url 'gym:delete_Equipment' i.id %}" style="display:inline;" onsubmit="return confirm('Are you sure to delete this Equipment?')">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-sm btn-delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

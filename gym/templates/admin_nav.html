@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System - Admin</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/gym-theme.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+</head>
+<body>
+    <nav class="admin-navbar">
+        <div class="container">
+            <a href="{% url 'gym:admin_home' %}" class="logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="logo" style="height:45px; width:45px; border-radius:50%; object-fit:cover;">
+                <span>Gym<em>Admin</em></span>
+            </a>
+            <div class="hamburger" onclick="toggleAdminMenu()">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="admin-nav-links" id="admin-nav">
+                <li><a href="{% url 'gym:admin_home' %}">Home</a></li>
+
+                <li class="admin-dropdown">
+                    <a href="#" onclick="toggleDropdown(event, this)">Enquiry <i class="fas fa-caret-down"></i></a>
+                    <div class="admin-dropdown-menu">
+                        <a href="{% url 'gym:addEnquiry' %}">Add Enquiry</a>
+                        <a href="{% url 'gym:viewEnquiry' %}">View Enquiry</a>
+                    </div>
+                </li>
+
+                <li class="admin-dropdown">
+                    <a href="#" onclick="toggleDropdown(event, this)">Plan <i class="fas fa-caret-down"></i></a>
+                    <div class="admin-dropdown-menu">
+                        <a href="{% url 'gym:addPlan' %}">Add Plan</a>
+                        <a href="{% url 'gym:viewPlan' %}">View Plan</a>
+                    </div>
+                </li>
+
+                <li class="admin-dropdown">
+                    <a href="#" onclick="toggleDropdown(event, this)">Equipment <i class="fas fa-caret-down"></i></a>
+                    <div class="admin-dropdown-menu">
+                        <a href="{% url 'gym:addEquipment' %}">Add Equipment</a>
+                        <a href="{% url 'gym:viewEquipment' %}">View Equipment</a>
+                    </div>
+                </li>
+
+                <li class="admin-dropdown">
+                    <a href="#" onclick="toggleDropdown(event, this)">Member <i class="fas fa-caret-down"></i></a>
+                    <div class="admin-dropdown-menu">
+                        <a href="{% url 'gym:addMember' %}">Add Member</a>
+                        <a href="{% url 'gym:viewMember' %}">View Member</a>
+                    </div>
+                </li>
+
+                <li class="admin-dropdown">
+                    <a href="#" onclick="toggleDropdown(event, this)"><i class="fas fa-users"></i> Users <i class="fas fa-caret-down"></i></a>
+                    <div class="admin-dropdown-menu">
+                        <a href="{% url 'gym:viewUsers' %}">View Users</a>
+                    </div>
+                </li>
+
+                <li class="admin-dropdown">
+                    <a href="#" onclick="toggleDropdown(event, this)">Queries <i class="fas fa-caret-down"></i></a>
+                    <div class="admin-dropdown-menu">
+                        <a href="{% url 'gym:unread_queries' %}">Unread Queries</a>
+                        <a href="{% url 'gym:read_queries' %}">Read Queries</a>
+                    </div>
+                </li>
+
+                <li class="admin-dropdown">
+                    <a href="#" onclick="toggleDropdown(event, this)"><i class="fas fa-user-cog"></i> Account <i class="fas fa-caret-down"></i></a>
+                    <div class="admin-dropdown-menu">
+                        <a href="{% url 'gym:changePassword' %}"><i class="fas fa-key"></i> Change Password</a>
+                        <a href="{% url 'gym:logout' %}"><i class="fas fa-power-off"></i> Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer class="gym-footer">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Gym Management System. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        function toggleAdminMenu() {
+            var nav = document.getElementById('admin-nav');
+            nav.classList.toggle('active');
+        }
+
+        function toggleDropdown(e, el) {
+            e.preventDefault();
+            e.stopPropagation();
+            var menu = el.nextElementSibling;
+            var isOpen = menu.classList.contains('active');
+            // Close all other menus
+            document.querySelectorAll('.admin-dropdown-menu').forEach(function(m) {
+                if (m !== menu) m.classList.remove('active');
+            });
+            menu.classList.toggle('active', !isOpen);
+        }
+
+        // Close mobile nav when a direct link is clicked (not dropdown toggle)
+        document.querySelectorAll('#admin-nav > li:not(.admin-dropdown) > a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('admin-nav').classList.remove('active');
+            });
+        });
+
+        // Close dropdown menus when dropdown sub-links are clicked
+        document.querySelectorAll('.admin-dropdown-menu a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('admin-nav').classList.remove('active');
+                document.querySelectorAll('.admin-dropdown-menu').forEach(function(m) {
+                    m.classList.remove('active');
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            if ($('#example').length) {
+                $('#example').DataTable();
+            }
+        });
+    </script>
+</body>
+</html>

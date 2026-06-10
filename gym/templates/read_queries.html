@@ -1,0 +1,40 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="table-container">
+        <div class="table-header">
+            <h3>Read <span>Queries</span></h3>
+        </div>
+        <table id="example" class="gym-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Email ID</th>
+                    <th>Contact Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in contact %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.emailid }}</td>
+                    <td>{{ i.contact }}</td>
+                    <td>
+                        <a href="{% url 'gym:view_queries' i.id %}" class="btn-sm btn-view">View</a>
+                        <form method="post" action="{% url 'gym:delete_contact' i.id %}" style="display:inline;" onsubmit="return confirm('Are you sure to delete this Query?')">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-sm btn-delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

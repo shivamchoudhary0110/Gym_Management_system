@@ -1,0 +1,63 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="form-container wide" style="margin:0 auto;">
+        <h2>Edit <span>User</span></h2>
+        <p class="subtitle">Update user details for <strong>{{ target_user.username }}</strong></p>
+
+        {% if error == "no" %}
+            <div class="alert alert-success">User updated successfully!</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control" value="{{ target_user.first_name }}" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control" value="{{ target_user.last_name }}" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="{{ target_user.email }}" placeholder="Email">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" name="phone" class="form-control" value="{{ profile.phone }}" placeholder="Phone">
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="date_of_birth" class="form-control" value="{{ profile.date_of_birth|date:'Y-m-d' }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="gender-radio">
+                    <label><input type="radio" name="gender" value="Male" {% if profile.gender == "Male" %}checked{% endif %}> Male</label>
+                    <label><input type="radio" name="gender" value="Female" {% if profile.gender == "Female" %}checked{% endif %}> Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                    <input type="checkbox" name="is_staff" {% if target_user.is_staff %}checked{% endif %} style="width:auto; accent-color:var(--primary);">
+                    <strong>Staff Access (Admin)</strong>
+                </label>
+            </div>
+            <div class="form-group">
+                <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                    <input type="checkbox" name="is_superuser" {% if target_user.is_superuser %}checked{% endif %} style="width:auto; accent-color:var(--primary);">
+                    <strong>Superuser Access</strong>
+                </label>
+            </div>
+            <button type="submit" class="form-submit">Update User</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

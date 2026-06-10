@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gym Management</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/gym-theme.css' %}">
+</head>
+<body>
+    <div class="form-page">
+        <div class="form-container">
+            <h2>Login</h2>
+            <p class="subtitle">Sign in to your account. Admin users will be redirected to the dashboard.</p>
+
+            {% if error == "yes" %}
+                <div id="error-alert" class="alert alert-danger" style="display:none;">Invalid Credentials, Please Try Again</div>
+            {% endif %}
+
+            <form method="post" id="loginForm">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="form-submit">Login</button>
+            </form>
+            <div class="form-links">
+                Don't have an account? <a href="{% url 'gym:register' %}">Register here</a>
+            </div>
+            <div class="form-links">
+                <a href="{% url 'gym:index' %}">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        {% if error == "yes" %}
+            var alertBox = document.getElementById('error-alert');
+            alertBox.style.display = 'block';
+            alertBox.scrollIntoView({ behavior: 'smooth' });
+        {% endif %}
+    </script>
+</body>
+</html>

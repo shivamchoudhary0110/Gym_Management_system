@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/gym-theme.css' %}">
+</head>
+<body>
+    <nav class="gym-navbar">
+        <div class="container">
+            <a href="{% url 'gym:index' %}" class="logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="logo" style="height:45px; width:45px; border-radius:50%; object-fit:cover;">
+                <span>Gym<em>Management</em></span>
+            </a>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="gym-nav-links" id="gym-nav">
+                <li><a href="{% url 'gym:index' %}">Home</a></li>
+                <li><a href="{% url 'gym:about' %}">About</a></li>
+                <li><a href="{% url 'gym:gym_page' %}">The Gym</a></li>
+                <li><a href="{% url 'gym:classes' %}">Classes</a></li>
+                <li><a href="{% url 'gym:testimonials' %}">Testimonials</a></li>
+                <li><a href="{% url 'gym:contact' %}">Contact</a></li>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <li><a href="{% url 'gym:admin_home' %}">Dashboard</a></li>
+                    {% else %}
+                        <li><a href="{% url 'gym:user_dashboard' %}">Dashboard</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'gym:user_profile' %}">Profile</a></li>
+                    <li><a href="{% url 'gym:user_logout' %}" class="btn-outline-gym">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'gym:user_login' %}" class="btn-primary-gym">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <footer class="gym-footer">
+        <p>&copy; <script>document.write(new Date().getFullYear())</script> Gym Management System. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            var nav = document.getElementById('gym-nav');
+            nav.classList.toggle('active');
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                var target = document.querySelector(href);
+                if (target) {
+                    document.getElementById('gym-nav').classList.remove('active');
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        document.querySelectorAll('#gym-nav a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('gym-nav').classList.remove('active');
+            });
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

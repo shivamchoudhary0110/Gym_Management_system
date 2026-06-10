@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section" style="padding-top:4rem;">
+    <div class="section-center">
+        <div class="section-title">
+            <h2>Our <span>Classes</span></h2>
+            <p>Explore our fitness programs</p>
+        </div>
+
+        <div class="classes-grid">
+            <div class="class-card">
+                <img src="{% static 'images/gym5.jpg' %}" alt="Weights">
+                <div class="overlay">
+                    <h4>Weights</h4>
+                </div>
+            </div>
+            <div class="class-card">
+                <img src="{% static 'images/Crossfit.jpg' %}" alt="Crossfit">
+                <div class="overlay">
+                    <h4>Crossfit</h4>
+                </div>
+            </div>
+            <div class="class-card">
+                <img src="{% static 'images/Pilates.jpg' %}" alt="Pilates">
+                <div class="overlay">
+                    <h4>Pilates</h4>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:4rem;">
+            <div class="section-title">
+                <h2>Class <span>Schedule</span></h2>
+                <p>Find the perfect time for your workout</p>
+            </div>
+            <div class="table-container">
+                <table class="gym-table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Weight Training</strong></td>
+                            <td>6AM - 8AM</td>
+                            <td>6AM - 8AM</td>
+                            <td>6AM - 8AM</td>
+                            <td>6AM - 8AM</td>
+                            <td>6AM - 8AM</td>
+                            <td>7AM - 9AM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Crossfit</strong></td>
+                            <td>7AM - 8AM</td>
+                            <td>7AM - 8AM</td>
+                            <td>7AM - 8AM</td>
+                            <td>7AM - 8AM</td>
+                            <td>7AM - 8AM</td>
+                            <td>8AM - 9AM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pilates</strong></td>
+                            <td>5PM - 6PM</td>
+                            <td>5PM - 6PM</td>
+                            <td>5PM - 6PM</td>
+                            <td>5PM - 6PM</td>
+                            <td>5PM - 6PM</td>
+                            <td>9AM - 10AM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cardio</strong></td>
+                            <td>Open 24/7</td>
+                            <td>Open 24/7</td>
+                            <td>Open 24/7</td>
+                            <td>Open 24/7</td>
+                            <td>Open 24/7</td>
+                            <td>Open 24/7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-top:4rem; text-align:center;">
+            <h3 style="font-size:1.5rem; font-weight:700; margin-bottom:1rem;">Ready to Join a Class?</h3>
+            <p style="color:var(--text-secondary); margin-bottom:1.5rem;">Sign up today and get access to all our classes</p>
+            <a href="{% url 'gym:register' %}" class="btn-gym btn-gym-primary">Join Now</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <h1 class="dashboard-title">Admin <span>Dashboard</span></h1>
+
+    <div class="stats-grid">
+        <a href="{% url 'gym:viewEnquiry' %}" class="stat-card" style="text-decoration:none;">
+            <div class="stat-number">{{ en }}</div>
+            <div class="stat-label">Total Enquiries</div>
+        </a>
+        <a href="{% url 'gym:viewPlan' %}" class="stat-card" style="text-decoration:none;">
+            <div class="stat-number">{{ p }}</div>
+            <div class="stat-label">Total Plans</div>
+        </a>
+        <a href="{% url 'gym:viewEquipment' %}" class="stat-card" style="text-decoration:none;">
+            <div class="stat-number">{{ eq }}</div>
+            <div class="stat-label">Total Equipment</div>
+        </a>
+        <a href="{% url 'gym:viewMember' %}" class="stat-card" style="text-decoration:none;">
+            <div class="stat-number">{{ m }}</div>
+            <div class="stat-label">Total Members</div>
+        </a>
+        <a href="{% url 'gym:viewUsers' %}" class="stat-card" style="text-decoration:none;">
+            <div class="stat-number">{{ u }}</div>
+            <div class="stat-label">Registered Users</div>
+        </a>
+    </div>
+
+    <div style="margin-top:2rem;">
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Quick <span>Actions</span></h3>
+            </div>
+            <div class="features-grid" style="padding:1rem;">
+                <a href="{% url 'gym:addMember' %}" class="feature-card" style="text-decoration:none;">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Add Member</h3>
+                </a>
+                <a href="{% url 'gym:addPlan' %}" class="feature-card" style="text-decoration:none;">
+                    <i class="fas fa-plus-circle"></i>
+                    <h3>Add Plan</h3>
+                </a>
+                <a href="{% url 'gym:addEquipment' %}" class="feature-card" style="text-decoration:none;">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>Add Equipment</h3>
+                </a>
+                <a href="{% url 'gym:addEnquiry' %}" class="feature-card" style="text-decoration:none;">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>Add Enquiry</h3>
+                </a>
+                <a href="{% url 'gym:viewUsers' %}" class="feature-card" style="text-decoration:none;">
+                    <i class="fas fa-users"></i>
+                    <h3>View Users</h3>
+                </a>
+                <a href="{% url 'gym:changePassword' %}" class="feature-card" style="text-decoration:none;">
+                    <i class="fas fa-key"></i>
+                    <h3>Change Password</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Recent <span>Enquiries</span></h3>
+            </div>
+            <table class="gym-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in recent_enquiries %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ e.name }}</td>
+                        <td>{{ e.mobile }}</td>
+                        <td>{{ e.email }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" style="text-align:center; color:var(--text-muted);">No recent enquiries</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Recent <span>Members</span></h3>
+            </div>
+            <table class="gym-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Plan</th>
+                        <th>Join Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mem in recent_members %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ mem.name }}</td>
+                        <td>{{ mem.plan.name|default:"-" }}</td>
+                        <td>{{ mem.joindate|date:"d M Y"|default:"-" }}</td>
+                        <td>Rs. {{ mem.initamount }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align:center; color:var(--text-muted);">No recent members</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Recent <span>Registered Users</span></h3>
+            </div>
+            <table class="gym-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ru in recent_users %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ ru.username }}</td>
+                        <td>{{ ru.first_name }} {{ ru.last_name }}</td>
+                        <td>{{ ru.email }}</td>
+                        <td>{{ ru.date_joined|date:"d M Y" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align:center; color:var(--text-muted);">No registered users</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

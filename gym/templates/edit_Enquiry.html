@@ -1,0 +1,45 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="form-container" style="margin:0 auto;">
+        <h2>Edit <span>Enquiry</span></h2>
+        <p class="subtitle">Update enquiry details</p>
+
+        {% if error == "no" %}
+            <div class="alert alert-success">Enquiry updated successfully!</div>
+        {% elif error == "yes" %}
+            <div class="alert alert-danger">Something went wrong. Please try again.</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label>Contact Number</label>
+                {{ form.mobile }}
+            </div>
+            <div class="form-group">
+                <label>Email ID</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label>Age</label>
+                {{ form.age }}
+            </div>
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="gender-radio">
+                    <label><input type="radio" name="gender" value="Male" {% if enquiry.gender == "Male" %}checked{% endif %}> Male</label>
+                    <label><input type="radio" name="gender" value="Female" {% if enquiry.gender == "Female" %}checked{% endif %}> Female</label>
+                </div>
+            </div>
+            <button type="submit" class="form-submit">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

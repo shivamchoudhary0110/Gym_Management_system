@@ -1,0 +1,42 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="form-container" style="margin:0 auto;">
+        <h2>Add <span>Equipment</span></h2>
+        <p class="subtitle">Add new gym equipment</p>
+
+        {% if error == "no" %}
+            <div class="alert alert-success">Equipment added successfully!</div>
+        {% elif error == "yes" %}
+            <div class="alert alert-danger">Something went wrong. Please try again.</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Equipment Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label>Price</label>
+                {{ form.price }}
+            </div>
+            <div class="form-group">
+                <label>Unit</label>
+                {{ form.unit }}
+            </div>
+            <div class="form-group">
+                <label>Purchase Date</label>
+                {{ form.purchasedate }}
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                {{ form.description }}
+            </div>
+            <button type="submit" class="form-submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

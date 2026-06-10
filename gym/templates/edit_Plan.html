@@ -1,0 +1,34 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="form-container" style="margin:0 auto;">
+        <h2>Edit <span>Plan</span></h2>
+        <p class="subtitle">Update plan details</p>
+
+        {% if error == "no" %}
+            <div class="alert alert-success">Plan updated successfully!</div>
+        {% elif error == "yes" %}
+            <div class="alert alert-danger">Something went wrong. Please try again.</div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Plan Name</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label>Amount</label>
+                {{ form.amount }}
+            </div>
+            <div class="form-group">
+                <label>Duration (Months)</label>
+                {{ form.duration }}
+            </div>
+            <button type="submit" class="form-submit">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

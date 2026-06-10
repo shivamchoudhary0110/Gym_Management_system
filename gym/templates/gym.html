@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section" style="padding-top:4rem;">
+    <div class="section-center">
+        <div class="section-title">
+            <h2>The <span>Gym</span></h2>
+            <p>Why you should work out here</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>All Trainer Good</h3>
+                <p>"All Trainer and good behaviour wise helping all Time."</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-leaf"></i>
+                <h3>Good Training</h3>
+                <p>"Here all Equipment are good. Gym owner are also good person, good trainer."</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-battery-three-quarters"></i>
+                <h3>Core Strength</h3>
+                <p>"Strength does not come from physical capacity. It comes from an indomitable will."</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-smile-beam"></i>
+                <h3>Positivity</h3>
+                <p>"Actually, I just woke up one day and decided I didn't want to feel..."</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-running"></i>
+                <h3>Cardio Zone</h3>
+                <p>Latest treadmills, ellipticals, and bikes for optimal cardiovascular training.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Free Weights</h3>
+                <p>Complete range of dumbbells, barbells, and benches for strength training.</p>
+            </div>
+        </div>
+
+        <div style="margin-top:4rem;">
+            <div class="section-title">
+                <h2>Our <span>Equipment</span></h2>
+                <p>State of the art facilities</p>
+            </div>
+            <div class="classes-grid">
+                <div class="class-card">
+                    <img src="{% static 'images/gym5.jpg' %}" alt="Weights">
+                    <div class="overlay">
+                        <h4>Weight Training</h4>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <img src="{% static 'images/Crossfit.jpg' %}" alt="Crossfit">
+                    <div class="overlay">
+                        <h4>Crossfit Zone</h4>
+                    </div>
+                </div>
+                <div class="class-card">
+                    <img src="{% static 'images/Pilates.jpg' %}" alt="Pilates">
+                    <div class="overlay">
+                        <h4>Pilates Studio</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

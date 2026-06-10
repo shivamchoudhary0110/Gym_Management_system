@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Gym Management</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/gym-theme.css' %}">
+</head>
+<body>
+    <div class="form-page">
+        <div class="form-container wide">
+            <h2>Create <span>Account</span></h2>
+            <p class="subtitle">Join our gym community today</p>
+
+            {% if error == "yes" %}
+                <div class="alert alert-danger">Registration failed. Please check your details and try again.</div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Password</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        {{ form.password2 }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" name="date_of_birth" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="gender-radio">
+                            <label><input type="radio" name="gender" value="Male"> Male</label>
+                            <label><input type="radio" name="gender" value="Female"> Female</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="form-submit">Register</button>
+            </form>
+            <div class="form-links">
+                Already have an account? <a href="{% url 'gym:user_login' %}">Login here</a>
+            </div>
+            <div class="form-links">
+                <a href="{% url 'gym:index' %}">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

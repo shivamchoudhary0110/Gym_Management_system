@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <h1 class="dashboard-title">Welcome, <span>{{ user.first_name|default:user.username }}</span></h1>
+
+    <div class="stats-grid">
+        <a href="{% url 'gym:user_profile' %}" class="stat-card" style="text-decoration:none; color:inherit;">
+            <div class="stat-number"><i class="fas fa-user" style="font-size:2rem;"></i></div>
+            <div class="stat-label">Your Profile</div>
+        </a>
+        {% if active_member %}
+        <div class="stat-card" style="text-decoration:none; color:inherit;">
+            <div class="stat-number" style="color:var(--success);"><i class="fas fa-check-circle" style="font-size:2rem;"></i></div>
+            <div class="stat-label">Active Plan: {{ active_member.plan.name }}</div>
+        </div>
+        <div class="stat-card" style="text-decoration:none; color:inherit;">
+            <div class="stat-number"><i class="fas fa-calendar" style="font-size:2rem;"></i></div>
+            <div class="stat-label">Since {{ active_member.joindate|date:"d M Y" }}</div>
+        </div>
+        {% else %}
+        <a href="#plans" class="stat-card" style="text-decoration:none; color:inherit;">
+            <div class="stat-number" style="color:var(--danger);"><i class="fas fa-exclamation-circle" style="font-size:2rem;"></i></div>
+            <div class="stat-label">No Active Plan</div>
+        </a>
+        {% endif %}
+        <a href="{% url 'gym:contact' %}" class="stat-card" style="text-decoration:none; color:inherit;">
+            <div class="stat-number"><i class="fas fa-phone" style="font-size:2rem;"></i></div>
+            <div class="stat-label">Contact Support</div>
+        </a>
+    </div>
+
+    <div style="margin-top:2rem;">
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Your <span>Profile</span></h3>
+                <a href="{% url 'gym:user_profile' %}" class="btn-sm btn-edit">Edit Profile</a>
+            </div>
+            <table class="gym-table">
+                <tbody>
+                    <tr>
+                        <td><strong>Username</strong></td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Full Name</strong></td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email</strong></td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Phone</strong></td>
+                        <td>{{ profile.phone|default:"Not set" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date of Birth</strong></td>
+                        <td>{{ profile.date_of_birth|default:"Not set" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gender</strong></td>
+                        <td>{{ profile.gender|default:"Not set" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Member Since</strong></td>
+                        <td>{{ user.date_joined|date:"d M Y" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if members %}
+    <div style="margin-top:2rem;">
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Your <span>Memberships</span></h3>
+            </div>
+            <table class="gym-table">
+                <thead>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Duration</th>
+                        <th>Amount Paid</th>
+                        <th>Join Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mem in members %}
+                    <tr>
+                        <td><strong>{{ mem.plan.name|default:"-" }}</strong></td>
+                        <td>{{ mem.plan.duration|default:"-" }} Month{{ mem.plan.duration|pluralize }}</td>
+                        <td>Rs. {{ mem.initamount }}</td>
+                        <td>{{ mem.joindate|date:"d M Y"|default:"-" }}</td>
+                        <td><span style="color:var(--success); font-weight:700;">Active</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if plans %}
+    <div style="margin-top:2rem;" id="plans">
+        <div class="table-container">
+            <div class="table-header">
+                <h3>Available <span>Plans</span></h3>
+                <p style="color:var(--text-secondary);">Choose a plan to get started</p>
+            </div>
+            <div class="features-grid" style="padding:1.5rem;">
+                {% for plan in plans %}
+                <div class="feature-card">
+                    <i class="fas fa-star" style="color:var(--accent);"></i>
+                    <h3>{{ plan.name }}</h3>
+                    <p style="font-size:1.5rem; font-weight:900; color:var(--primary); margin:0.5rem 0;">Rs. {{ plan.amount }}</p>
+                    <p style="color:var(--text-secondary);">{{ plan.duration }} Month{{ plan.duration|pluralize }}</p>
+                    <a href="{% url 'gym:subscribe_plan' plan.id %}" class="btn-gym btn-gym-primary" style="display:inline-block; margin-top:1rem; padding:0.6rem 2rem; font-size:0.9rem;" onclick="return confirm('Subscribe to {{ plan.name }} for Rs. {{ plan.amount }}?')">Subscribe Now</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-page" style="min-height: calc(100vh - 200px);">
+    <div class="form-container wide">
+        <h2>My <span>Profile</span></h2>
+        <p class="subtitle">Manage your account details</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <h3 style="margin-bottom:1rem; font-size:1.2rem;">Account Details</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" class="form-control" value="{{ user.first_name }}" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" class="form-control" value="{{ user.last_name }}" placeholder="Last Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control" value="{{ user.email }}" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                {{ form.phone }}
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    {{ form.date_of_birth }}
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="gender-radio">
+                        <label><input type="radio" name="gender" value="Male" {% if profile.gender == "Male" %}checked{% endif %}> Male</label>
+                        <label><input type="radio" name="gender" value="Female" {% if profile.gender == "Female" %}checked{% endif %}> Female</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="form-submit">Update Profile</button>
+        </form>
+        <div class="form-links">
+            <a href="{% url 'gym:user_dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

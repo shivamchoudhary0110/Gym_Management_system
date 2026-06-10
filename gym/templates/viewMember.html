@@ -1,0 +1,48 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="table-container">
+        <div class="table-header">
+            <h3>View <span>Member</span></h3>
+        </div>
+        <table id="example" class="gym-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Email ID</th>
+                    <th>Gender</th>
+                    <th>Plan</th>
+                    <th>Joining Date</th>
+                    <th>Initial Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in member %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.contact }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.gender }}</td>
+                    <td>{{ i.plan.name }}</td>
+                    <td>{{ i.joindate }}</td>
+                    <td>{{ i.initamount }}</td>
+                    <td>
+                        <a href="{% url 'gym:edit_Member' i.id %}" class="btn-sm btn-edit"><i class="fas fa-edit"></i></a>
+                        <form method="post" action="{% url 'gym:delete_Member' i.id %}" style="display:inline;" onsubmit="return confirm('Are you sure to delete this Member?')">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-sm btn-delete"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

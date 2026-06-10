@@ -1,0 +1,44 @@
+{% extends 'admin_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="table-container">
+        <div class="table-header">
+            <h3>View <span>Enquiry</span></h3>
+        </div>
+        <table id="example" class="gym-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Email ID</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in enquiry %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.name }}</td>
+                    <td>{{ i.mobile }}</td>
+                    <td>{{ i.email }}</td>
+                    <td>{{ i.age }}</td>
+                    <td>{{ i.gender }}</td>
+                    <td>
+                        <a href="{% url 'gym:edit_Enquiry' i.id %}" class="btn-sm btn-edit">Edit</a>
+                        <form method="post" action="{% url 'gym:delete_Enquiry' i.id %}" style="display:inline;" onsubmit="return confirm('Are you sure to delete this Enquiry?')">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-sm btn-delete">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

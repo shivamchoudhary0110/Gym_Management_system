@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<header class="hero" id="home">
+    <div class="hero-content">
+        <h1>Welcome To <span>Gym Management</span> System</h1>
+        <p>Gym Software is a fully featured Fitness club &amp; Gym Management Software designed. Provides end-to-end solutions for Add Enquiry, Plan, Equipment and Member.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'gym:user_login' %}" class="btn-gym btn-gym-primary">Get Started</a>
+            <a href="{% url 'gym:about' %}" class="btn-gym btn-gym-outline">Learn More</a>
+        </div>
+    </div>
+</header>
+
+<section class="section">
+    <div class="section-center">
+        <div class="section-title">
+            <h2>Why Choose <span>Us</span></h2>
+            <p>We provide everything you need to achieve your fitness goals</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-dumbbell"></i>
+                <h3>Modern Equipment</h3>
+                <p>State of the art fitness equipment for every workout style, from cardio to strength training.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-users"></i>
+                <h3>Expert Trainers</h3>
+                <p>Professional certified trainers dedicated to helping you reach your fitness goals safely.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Personal Training</h3>
+                <p>Customized workout plans tailored specifically to your body type and objectives.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Flexible Schedules</h3>
+                <p>Open early morning to late night, fitting perfectly into your busy lifestyle.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Safe Environment</h3>
+                <p>Clean, sanitized facilities with proper safety protocols for your peace of mind.</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-smile"></i>
+                <h3>Community</h3>
+                <p>Join a supportive community of like-minded individuals on the same fitness journey.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background:var(--bg-surface);">
+    <div class="section-center">
+        <div class="contact-grid">
+            <div class="animate-on-scroll">
+                <div class="section-title" style="text-align:left;">
+                    <h2>About <span>Our Gym</span></h2>
+                </div>
+                <p style="color:var(--text-secondary); margin-bottom:1rem; font-size:1.05rem;">Anytime Fitness works closely in association of various other partner brands to achieve the best mutually benefitted output. Here is a glimpse of World Health Day event.</p>
+                <p style="color:var(--text-secondary); margin-bottom:2rem; font-size:1.05rem;">A special thanks to all the speakers and brand partners for making the event such a success. We believe in holistic fitness that combines physical strength with mental well-being.</p>
+                <a href="{% url 'gym:about' %}" class="btn-gym btn-gym-primary">Read More</a>
+            </div>
+            <div class="animate-on-scroll">
+                <img src="{% static 'images/gym4.jpg' %}" alt="About Gym" style="width:100%; border-radius:var(--radius); box-shadow:var(--shadow-lg);">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="workout">
+    <div class="section-center">
+        <div class="section-title">
+            <h2>Why Work Out <span>Here</span></h2>
+            <p>We provide the best training experience</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-bolt"></i>
+                <h3>All Trainer Good</h3>
+                <p>"All Trainer and good behaviour wise helping all Time."</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-leaf"></i>
+                <h3>Good Training</h3>
+                <p>"Here all Equipment are good. Gym owner are also good person, good trainer."</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-battery-three-quarters"></i>
+                <h3>Core Strength</h3>
+                <p>"Strength does not come from physical capacity. It comes from an indomitable will."</p>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <i class="fas fa-smile-beam"></i>
+                <h3>Positivity</h3>
+                <p>"Actually, I just woke up one day and decided I didn't want to feel..."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="testimonial" style="background:var(--bg-surface);">
+    <div class="section-center">
+        <div class="section-title">
+            <h2>Happy <span>Clients</span></h2>
+            <p>What our members say about us</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card animate-on-scroll">
+                <h4>Abhishek Pandey</h4>
+                <p>"Their trainers are exceptional, the overall vibe is great and I have had nothing but good experiences. I definitely recommend them to my friends and family..."</p>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <h4>Sandeep Sharma</h4>
+                <p>"Amazing personal trainers and complete, clean gym. Would highly recommend!..."</p>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <h4>Anuj Tawar</h4>
+                <p>"Trainers who really care and go above and beyond to help you achieve your goals. Small and private gym that feels more personal..."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="classes">
+    <div class="section-center">
+        <div class="section-title">
+            <h2>Our <span>Classes</span></h2>
+            <p>Explore our fitness programs</p>
+        </div>
+        <div class="classes-grid">
+            <div class="class-card animate-on-scroll">
+                <img src="{% static 'images/gym5.jpg' %}" alt="Weights">
+                <div class="overlay">
+                    <h4>Weights</h4>
+                </div>
+            </div>
+            <div class="class-card animate-on-scroll">
+                <img src="{% static 'images/Crossfit.jpg' %}" alt="Crossfit">
+                <div class="overlay">
+                    <h4>Crossfit</h4>
+                </div>
+            </div>
+            <div class="class-card animate-on-scroll">
+                <img src="{% static 'images/Pilates.jpg' %}" alt="Pilates">
+                <div class="overlay">
+                    <h4>Pilates</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background:var(--bg-surface);">
+    <div class="section-center" style="text-align:center;">
+        <div class="section-title">
+            <h2>Our <span>Stats</span></h2>
+            <p>Numbers speak for themselves</p>
+        </div>
+        <div class="stats-grid animate-on-scroll">
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Happy Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Expert Trainers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Transformations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-center" style="text-align:center;">
+        <div class="section-title">
+            <h2>Ready to <span>Start</span>?</h2>
+            <p>Join our community and transform your life today</p>
+        </div>
+        <div class="hero-buttons" style="justify-content:center;">
+            <a href="{% url 'gym:register' %}" class="btn-gym btn-gym-primary">Join Now</a>
+            <a href="{% url 'gym:contact' %}" class="btn-gym btn-gym-outline">Contact Us</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+</script>
+{% endblock %}
